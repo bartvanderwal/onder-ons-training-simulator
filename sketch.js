@@ -27,10 +27,10 @@ function setup(sketch) {
 
   config.hoekpunten = [hoekpunt1, hoekpunt2, hoekpunt3, hoekpunt4, hoekpunt5]
 
-  const a = new Speler(startpunt.x, startpunt.y, sketch, config, "Joris", 1, 'red')
-  const b = new Speler(startpunt.x, startpunt.y, sketch, config, "Jasper", 9, 'lightred', true)
-  const c = new Speler(startpunt.x, startpunt.y, sketch, config, "Pappa", 0.1, 'green')
-  const d = new Speler(startpunt.x, startpunt.y, sketch, config, "Hannah", 1, 'lightgreen', true)
+  const a = new Speler(startpunt.x, startpunt.y, sketch, config, "joris", 25, 'red')
+  const b = new Speler(startpunt.x, startpunt.y, sketch, config, "Jasper", 22, 'lightred', true)
+  const c = new Speler(startpunt.x, startpunt.y, sketch, config, "Pappa", 30, 'green')
+  const d = new Speler(startpunt.x, startpunt.y, sketch, config, "Hannah", 10, 'lightgreen', true)
 
   config.spelers = [a, b, c, d]
   sketch.createCanvas(400, 400)
