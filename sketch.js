@@ -17,21 +17,20 @@ const lijnkleur = 'black'
 function setup(sketch) {
   // sketch.ellipseMode(sketch.CORNER)
   sketch.textAlign(sketch.CENTER)
-  let startpunt = new Punt(100, 400, sketch)
+  let startpunt = new Punt(20, 400, sketch)
 
   const hoekpunt1 = new Punt(startpunt.x, startpunt.y, sketch)
   const hoekpunt2 = new Punt(400, 220, sketch)
   const hoekpunt3 = new Punt(120, 20, sketch)
-  const hoekpunt4 = new Punt(120, 320, sketch)
 
-  config.hoekpunten = [hoekpunt1, hoekpunt2, hoekpunt3, hoekpunt4]
+  config.hoekpunten = [hoekpunt1, hoekpunt2, hoekpunt3]
 
-  const a = new Speler(startpunt.x, startpunt.y, sketch, config, 'A', 2, 'red')
-  const b = new Speler(startpunt.x, startpunt.y, sketch, config, 'B', 4, 'blue')
-  const c = new Speler(startpunt.x, startpunt.y, sketch, config, 'C', 3, 'green')
-  const d = new Speler(startpunt.x, startpunt.y, sketch, config, 'D', 2.5, 'lightgreen')
+  const a = new Speler(startpunt.x, startpunt.y, sketch, config, 'A', 4, 'red')
+  const b = new Speler(startpunt.x, startpunt.y, sketch, config, 'B', 3, 'blue')
+  const c = new Speler(startpunt.x, startpunt.y, sketch, config, 'C', 2, 'green')
+  const d = new Speler(startpunt.x, startpunt.y, sketch, config, 'D', 1, 'lightgreen')
 
-  config.spelers = [a, b, c, d]
+  config.spelers = [a] //, b, c, d]
   sketch.createCanvas(600, 600)
 }
 

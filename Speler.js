@@ -66,7 +66,9 @@ export class Speler extends Punt {
       this.hoek = Math.atan((this.doelPunt().x-this.x)/(this.y-this.doelPunt().y))
       this.xDelta = Math.sin(this.hoek)*this.snelheid
       this.yDelta = Math.cos(this.hoek)*this.snelheid
-      console.log(`Doel van punt ${this.naam} is nu: ${this.doel} en hoek: ${this.hoek}! Δx, Δy: ${this.xDelta},${this.yDelta}`)
+      console.log(
+          `Doel van punt ${this.naam} is nu: ${this.doel} en hoek: ${this.hoek}!
+          Δx: ${Math.round(this.xDelta)}, Δy: ${Math.round(this.yDelta)}`)
     }
     
     stapNaarDoel() {
@@ -75,15 +77,26 @@ export class Speler extends Punt {
       // this.x += this.xDelta
       // this.y -= this.yDelta
 
-      if (this.x>this.doelPunt().x) {
-         this.x += this.xDelta
-      } else {
-        this.x += this.xDelta
-      }
-      if (this.y>this.doelPunt().y) {
-        this.y -= this.yDelta
-      } else {
-        this.y += this.yDelta
+      if (this.x>this.doelPunt().x) {     // A. Doel ligt links
+        if (this.y>this.doelPunt().y) {   // A1. Doel ligt linksboven
+          console.log(`Doel ${this.naam}: linksboven ?`)
+          this.x += this.xDelta           
+          this.y -= this.yDelta                
+        } else {                          // A2. Doel ligt linksonder
+          console.log(`Doel ${this.naam}: linksonder ?`)
+          this.x -= this.xDelta
+          this.y += this.yDelta
+        }
+      } else {                            // B. Doel ligt rechts
+        if (this.y>this.doelPunt().y) {   // B1. Doel ligt rechtsboven
+          console.log(`Doel ${this.naam}: rechtsboven`)
+          this.x += this.xDelta
+          this.y -= this.yDelta
+        } else {
+          console.log(`Doel ${this.naam}: rechtsonder ?`)
+          this.x += this.xDelta           // B2. Doel ligt rechtsonder
+          this.y += this.yDelta
+        }
       }
     }
   }
