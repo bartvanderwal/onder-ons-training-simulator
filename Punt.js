@@ -4,7 +4,7 @@ export class Punt {
 
     constructor(x, y, sketch, naam = '') {
       this.straal = 30
-      this.color = 'purple'
+      this.kleur = 'purple'
       this.x = x
       this.y = y
       this.sketch = sketch
@@ -27,16 +27,20 @@ export class Punt {
     teken() {
       if (window.stepNr%window.logIter===0) {
         console.log('teken (', this.roundX(), ', ', this.roundY(), ')', 
-            'straal: ', this.straal, 'color: ', this.color)
+            'straal: ', this.straal, 'kleur: ', this.kleur)
       }
-      this.sketch.stroke(this.color)
+      this.sketch.stroke(this.kleur)
       this.sketch.circle(this.roundX(), this.roundY(), this.straal)
       if (this.naam) {
+        this.sketch.stroke('black')
         this.sketch.text(this.naam, this.x, this.y)
-        this.sketch.text(`(x, y): (${this.roundX()}, ${this.roundY()}), doel: ${this.doel}`, this.roundX(), this.roundY()+Punt.lineHeight)
+        if (this.doel) {
+          this.sketch.text(`(x, y): (${this.roundX()}, ${this.roundY()})`, this.roundX(), this.roundY()+Punt.lineHeight)
+          this.sketch.text(`, doel: ${this.doel}`, this.roundX(), this.roundY()+2*Punt.lineHeight)
+        }
       }
     }
-        
+     
     toString() {
       return `x: ${this.roundX()}, y: ${this.roundY()}, naam: ${this.naam}`
     }
@@ -48,5 +52,3 @@ export class Punt {
         VLOT: 1.2
     }
 }
-  
-  

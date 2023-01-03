@@ -17,21 +17,23 @@ const lijnkleur = 'black'
 function setup(sketch) {
   // sketch.ellipseMode(sketch.CORNER)
   sketch.textAlign(sketch.CENTER)
-  let startpunt = new Punt(20, 400, sketch)
+  let startpunt = new Punt(20, 300, sketch)
 
   const hoekpunt1 = new Punt(startpunt.x, startpunt.y, sketch)
-  const hoekpunt2 = new Punt(400, 220, sketch)
-  const hoekpunt3 = new Punt(120, 20, sketch)
+  const hoekpunt2 = new Punt(300, 320, sketch)
+  const hoekpunt3 = new Punt(250, 20, sketch)
+  const hoekpunt4 = new Punt(70, 10, sketch)
+  const hoekpunt5 = new Punt(10, 120, sketch)
 
-  config.hoekpunten = [hoekpunt1, hoekpunt2, hoekpunt3]
+  config.hoekpunten = [hoekpunt1, hoekpunt2, hoekpunt3, hoekpunt4, hoekpunt5]
 
-  const a = new Speler(startpunt.x, startpunt.y, sketch, config, 'A', 4, 'red')
-  const b = new Speler(startpunt.x, startpunt.y, sketch, config, 'B', 3, 'blue')
-  const c = new Speler(startpunt.x, startpunt.y, sketch, config, 'C', 2, 'green')
-  const d = new Speler(startpunt.x, startpunt.y, sketch, config, 'D', 1, 'lightgreen')
+  const a = new Speler(startpunt.x, startpunt.y, sketch, config, "A", 4, 'blue')
+  const b = new Speler(startpunt.x, startpunt.y, sketch, config, "A'", 3, 'lightblue', true)
+  const c = new Speler(startpunt.x, startpunt.y, sketch, config, "B", 2, 'green')
+  const d = new Speler(startpunt.x, startpunt.y, sketch, config, "B'", 1, 'lightgreen', true)
 
-  config.spelers = [a] //, b, c, d]
-  sketch.createCanvas(600, 600)
+  config.spelers = [a, b, c, d]
+  sketch.createCanvas(400, 400)
 }
 
 function keyPressed(sketch){
@@ -78,4 +80,4 @@ const sketch = (s) => {
   s.mousePressed = () => mousePressed(s)
 }
 
-const sketchInstance = new p5(sketch)
+const sketchInstance = new p5(sketch, '#sketch')
