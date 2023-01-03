@@ -1,5 +1,5 @@
-import '/node_modules/p5/lib/p5.min.js'
-
+// import '/node_modules/p5/lib/p5.min.js'
+import "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"
 // Gebruiken van ES modules in P5: https://www.youtube.com/watch?v=P0bkwncSJag
 import { Punt } from './Punt.js'
 import { Speler } from './Speler.js'
@@ -27,10 +27,10 @@ function setup(sketch) {
 
   config.hoekpunten = [hoekpunt1, hoekpunt2, hoekpunt3, hoekpunt4, hoekpunt5]
 
-  const a = new Speler(startpunt.x, startpunt.y, sketch, config, "A", 4, 'blue')
-  const b = new Speler(startpunt.x, startpunt.y, sketch, config, "A'", 3, 'lightblue', true)
-  const c = new Speler(startpunt.x, startpunt.y, sketch, config, "B", 2, 'green')
-  const d = new Speler(startpunt.x, startpunt.y, sketch, config, "B'", 1, 'lightgreen', true)
+  const a = new Speler(startpunt.x, startpunt.y, sketch, config, "Joris", 1, 'red')
+  const b = new Speler(startpunt.x, startpunt.y, sketch, config, "Jasper", 9, 'lightred', true)
+  const c = new Speler(startpunt.x, startpunt.y, sketch, config, "Pappa", 0.1, 'green')
+  const d = new Speler(startpunt.x, startpunt.y, sketch, config, "Hannah", 1, 'lightgreen', true)
 
   config.spelers = [a, b, c, d]
   sketch.createCanvas(400, 400)

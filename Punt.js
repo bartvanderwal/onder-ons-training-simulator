@@ -30,6 +30,7 @@ export class Punt {
             'straal: ', this.straal, 'kleur: ', this.kleur)
       }
       this.sketch.stroke(this.kleur)
+      this.sketch.fill(this.kleur)
       this.sketch.circle(this.roundX(), this.roundY(), this.straal)
       if (this.naam) {
         this.sketch.stroke('black')
