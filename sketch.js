@@ -38,10 +38,10 @@ function setup(sketch) {
 
   config.hoekpunten = [startpunt, hoekpunt1, hoekpunt2, hoekpunt3, hoekpunt4]
 
-  const a = new Sporter(startpunt.x, startpunt.y, sketch, "Donald", 0.9, TEMPOS.DUUR, 'red')
-  const b = new Sporter(startpunt.x, startpunt.y, sketch, "Katrien", 1.1, TEMPOS.VLOT, 'lightred', true, a)
-  const c = new Sporter(startpunt.x, startpunt.y, sketch, "Kwik", 1.5, TEMPOS.DUUR, 'green')
-  const d = new Sporter(startpunt.x, startpunt.y, sketch, "Kwek", 1.2, TEMPOS.VLOT, 'lightgreen', true, c)
+  const a = new Sporter(startpunt.x, startpunt.y, sketch, "Donald", 0.9, TEMPOS.DUUR, 'green')
+  const b = new Sporter(startpunt.x, startpunt.y, sketch, "Katrien", 1.1, TEMPOS.VLOT, 'darkgreen', true, a)
+  const c = new Sporter(startpunt.x, startpunt.y, sketch, "Kwik", 1.5, TEMPOS.DUUR, 'gray')
+  const d = new Sporter(startpunt.x, startpunt.y, sketch, "Kwek", 1.2, TEMPOS.VLOT, 'lightgray', true, c)
 
   config.sporters = [a, b, c, d]
 }

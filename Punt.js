@@ -37,7 +37,7 @@ export class Punt {
         this.sketch.fill('black')
         this.sketch.text(this.naam, this.x, this.y)
         if (this.doel!==undefined) {
-          this.sketch.text(`(${this.roundX()}, ${this.roundY()})`, this.roundX(), this.roundY()+Punt.lineHeight)
+          // this.sketch.text(`(${this.roundX()}, ${this.roundY()})`, this.roundX(), this.roundY()+Punt.lineHeight)
           // this.sketch.text(`doel: ${this.doel}, v: ${this.snelheid}, pace: ${this.tempo}`, this.roundX(), this.roundY()+2*Punt.lineHeight)
           // this.sketch.text(`v: ${this.snelheid}`, this.roundX(), this.roundY()+3*Punt.lineHeight)
           // this.sketch.text(`pace: ${this.tempo}`, this.roundX(), this.roundY()+4*Punt.lineHeight)
