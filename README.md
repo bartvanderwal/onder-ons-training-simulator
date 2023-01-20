@@ -1,9 +1,9 @@
 # Onder Ons Training simulator
 
-Visualiseren van loopoefening in duo's in tegengestelde richting, zoals bij Onder ons middaggroep.
+Simulator voor visualiseren van loopoefening in duo's in tegengestelde richting, zoals bij Onder ons middaggroep.
 
-Het keren moet nog ingebouwd, wel ondersteund simulator al willekeurig aantal sporters, hoekpunten en lopen in 2 richtingen.
+Later wellicht meer instelbaar en ook mogelijk maken om andere oefeningen te simuleren.
 
-Later wellicht meer instelbaar en andere oefeningen ook mogeijk make te simuleren.
+## Animatie van eerste opzet
 
 <img src="assets/1e-opzet.gif">
