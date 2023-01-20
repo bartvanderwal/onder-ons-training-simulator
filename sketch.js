@@ -2,68 +2,104 @@
 import "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"
 // Gebruiken van ES modules in P5: https://www.youtube.com/watch?v=P0bkwncSJag
 import { Punt } from './Punt.js'
-import { Speler } from './Speler.js'
+import { Sporter } from './Sporter.js'
 
 const config = {
-  spelers: [],
+  sporters: [],
   hoekpunten: [],
-  verplaatsBallen: true
+  verplaatsBallen: true,
+  stepNr: 0,
+  logIteration: 10000,
+  draggedHoekpunt: null,
+  defaultLijnkleur: 'darkgray'
 }
 
-window.stepNr = 0
-window.logIter = 10000
-const lijnkleur = 'black'
+
+// Add modulo to standard Js Math lib.
+// Bron: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder#description
+Math.modulo = (n, d) => ((n % d) + d) % d
 
 function setup(sketch) {
   // sketch.ellipseMode(sketch.CORNER)
-  sketch.textAlign(sketch.CENTER)
-  let startpunt = new Punt(20, 300, sketch)
-
-  const hoekpunt1 = new Punt(startpunt.x, startpunt.y, sketch)
-  const hoekpunt2 = new Punt(300, 320, sketch)
-  const hoekpunt3 = new Punt(250, 20, sketch)
-  const hoekpunt4 = new Punt(70, 10, sketch)
-  const hoekpunt5 = new Punt(10, 120, sketch)
-
-  config.hoekpunten = [hoekpunt1, hoekpunt2, hoekpunt3, hoekpunt4, hoekpunt5]
-
-  const a = new Speler(startpunt.x, startpunt.y, sketch, config, "Donald", 10, 'red')
-  const b = new Speler(startpunt.x, startpunt.y, sketch, config, "Katrien", 7, 'lightred', true)
-  const c = new Speler(startpunt.x, startpunt.y, sketch, config, "Kwik", 15, 'green')
-  const d = new Speler(startpunt.x, startpunt.y, sketch, config, "Kwek", 3, 'lightgreen', true)
-
-  config.spelers = [a, b, c, d]
   sketch.createCanvas(400, 400)
+  sketch.textAlign(sketch.CENTER)
+  sketch.config = config
+
+  let startpunt = new Punt(40, 300, sketch)
+  config.startpunt = startpunt
+  const hoekpunt1 = new Punt(320, 340, sketch)
+  const hoekpunt2 = new Punt(300, 40, sketch)
+  const hoekpunt3 = new Punt(90, 30, sketch)
+  const hoekpunt4 = new Punt(30, 210, sketch)
+
+  const pauseButton = sketch.createButton('Pauze');
+  pauseButton.position(sketch.width/2, sketch.height);
+  pauseButton.mousePressed(pause);
+
+  config.hoekpunten = [startpunt, hoekpunt1, hoekpunt2, hoekpunt3, hoekpunt4]
+
+  const a = new Sporter(startpunt.x, startpunt.y, sketch, "Donald", 0.9, TEMPOS.DUUR, 'red')
+  const b = new Sporter(startpunt.x, startpunt.y, sketch, "Katrien", 1.1, TEMPOS.VLOT, 'lightred', true, a)
+  const c = new Sporter(startpunt.x, startpunt.y, sketch, "Kwik", 1.5, TEMPOS.DUUR, 'green')
+  const d = new Sporter(startpunt.x, startpunt.y, sketch, "Kwek", 1.2, TEMPOS.VLOT, 'lightgreen', true, c)
+
+  config.sporters = [a, b, c, d]
+}
+
+function pause() {
+  config.verplaatsBallen = !config.verplaatsBallen
 }
 
 function keyPressed(sketch){
-  if (sketch.key == ' '){ //this means space bar, since it is a space inside of the single quotes 
-    console.log('space ingedrukt')
-    config.verplaatsBallen = !config.verplaatsBallen
+  // This means space bar, since it is a space inside of the single quotes.
+  if (sketch.key == ' '){ 
+    pause()
   }  
 }
 function mousePressed(sketch) {
   console.log('mouse pressed')
-  window.pause = !window.pause
-  window.pause ? sketch.loop() : sketch.noLoop()
+  const muisklikpunt = new Punt(sketch.mouseX, sketch.mouseY)
+  config.hoekpunten.forEach(hoekpunt => {
+    if (hoekpunt.isBij(muisklikpunt)) {
+      config.draggedHoekpunt = hoekpunt
+      console.log(`je dragt nu hoekpunt '${hoekpunt.naam}'.` )
+    }
+
+  })
+  
+  // window.pause = !window.pause
+  // window.pause ? sketch.loop() : sketch.noLoop()
+}
+
+function mouseReleased(sketch) {
+  if (config.draggedHoekpunt) {
+    console.log(`Je bent gestopt met draggen hoekpunt '${hoekpunt.naam}'.` )
+    config.draggedHoekpunt = null
+  }
+}
+
+function mouseDragged(sketch) {
+  if (config.draggedHoekpunt) {
+    config.draggedHoekpunt.x = sketch.mouseX
+    config.draggedHoekpunt.y = sketch.mouseY
+  }
 }
 
 function draw(sketch) {
-  sketch.background('gray')
-  config.hoekpunten.forEach((hoekpunt, index) => {
+  sketch.background('green')
+  config.hoekpunten.forEach((hoekpunt) => {
     hoekpunt.teken()
+  })
+  config.hoekpunten.forEach((hoekpunt, index) => {
     const volgendeIndex = (index+1)%config.hoekpunten.length
-    sketch.stroke(lijnkleur)
     const volgendeHoekpunt = config.hoekpunten[volgendeIndex]
+    sketch.stroke(config.defaultLijnkleur)
     sketch.line(hoekpunt.x, hoekpunt.y, volgendeHoekpunt.x, volgendeHoekpunt.y)
   })
-  config.spelers.forEach(speler => {
-    speler.step()
-    speler.teken()
+  config.sporters.forEach(sporter => {
+    sporter.step()
+    sporter.teken()
   })
-
-  // sketch.grid()
-  // sketch.mousePos()
 }
 
 const TEMPOS = {
@@ -73,11 +109,15 @@ const TEMPOS = {
   VLOT: 1.2
 }
 
+// Initialiseren sketch, omdat we geen 'global mode' gebruiken.
+// Zie bv.: https://p5js.org/examples/instance-mode-instantiation.html
 const sketch = (s) => {
   s.setup = () => setup(s)
   s.draw = () => draw(s)
   s.keyPressed = () => keyPressed(s)
   s.mousePressed = () => mousePressed(s)
+  s.mouseDragged = () => mouseDragged(s)
+  s.mouseReleased = () => mouseReleased(s)
 }
 
 const sketchInstance = new p5(sketch, '#sketch')
