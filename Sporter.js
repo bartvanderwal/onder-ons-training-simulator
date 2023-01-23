@@ -46,7 +46,7 @@ export class Sporter extends Punt {
       // Als sporter partner heeft en bij deze partner komt (e.g. niet net start), keer dan (beiden) om en wissel van tempo.
       const isBijPartner = this.partner && this.isBijSporter(this.partner)
       if (isBijPartner && (!this.isBij(this.config.startpunt))) {        
-        console.log(`Wissel '${this.naam}' met partner '${this.partner.naam}'`)
+        // console.log(`Wissel '${this.naam}' met partner '${this.partner.naam}'`)
         this.looptTegengesteld = !this.looptTegengesteld
         this.partner.looptTegengesteld = !this.partner.looptTegengesteld;
 
@@ -55,16 +55,14 @@ export class Sporter extends Punt {
         [this.doel, this.partner.doel] = [this.partner.doel, this.doel];
         this.bepaalHoekEnDelta()
         this.partner.bepaalHoekEnDelta()
-        console.log(`Wissel '${this.naam}' en '${this.partner.naam}' voltooid!
-            \n\tSporter na: ${this}
-            \n\tPartner na: ${this.partner}`)
+        // console.log(`Wissel '${this.naam}' en '${this.partner.naam}' voltooid!
+        //    \n\tSporter na: ${this}
+        //    \n\tPartner na: ${this.partner}`)
 
-        // doe beiden extra stap (in nieuwe richting) na botsing,
+        // Doe beiden extra stap (in nieuwe richting) na botsing,
         // om probleem met evt. direct weer botsen te voorkomen
         this.stapNaarDoel()
         this.partner.stapNaarDoel()
-        // Stop processing, eventuele gelijktijdige botsing met hoek checken we de volgende stap.
-        // return;
       }
 
       // Als sporter op huidige doel is aangekomen, pak dan het volgende doel.
@@ -80,30 +78,15 @@ export class Sporter extends Punt {
 
     /** TODO: Niet meer 'volgende' doel */
     volgendeDoel() {
-
       this.hoekpuntenGepasseerd++;
-      const next1 = this.looptTegengesteld ?
-        Math.modulo(this.aantalHoekpunten()-this.hoekpuntenGepasseerd, this.aantalHoekpunten()) :
-        Math.modulo(this.hoekpuntenGepasseerd, this.aantalHoekpunten())
-
-      const next2 = this.looptTegengesteld ?
+      return this.looptTegengesteld ?
         (this.doel > 0 ? this.doel-1 : this.aantalHoekpunten()-1)
       : (this.doel < this.aantalHoekpunten()-1 ? this.doel+1 : 0)
-
-      return next2
     }
 
     isBijSporter(sporter) {
       // TODO: Switchen naar TypeScript voor meer type safety en compile time errors i.p.v. runtime errors.
-      const result = this.isBij(sporter) || sporter.isBij(this);
-      if (result) {
-        console.log(`Sporter '${this.naam}' is NU bij sporter '${sporter.naam}'
-        \n\tdeze sporter  : ${this}
-        \n\tandere sporter: ${sporter}`)
-      } else {
-        // console.log(`Sporter '${this.naam}' NIET bij sporter '${sporter.naam}' (this: ${this}, sporter: ${sporter}: ${result})`)
-      }
-      return result
+      return this.isBij(sporter) || sporter.isBij(this);
     }
     
     isBij(punt) {

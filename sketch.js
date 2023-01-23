@@ -14,11 +14,6 @@ const config = {
   defaultLijnkleur: 'darkgray'
 }
 
-
-// Add modulo to standard Js Math lib.
-// Bron: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder#description
-Math.modulo = (n, d) => ((n % d) + d) % d
-
 function setup(sketch) {
   // sketch.ellipseMode(sketch.CORNER)
   sketch.createCanvas(400, 400)
@@ -33,13 +28,13 @@ function setup(sketch) {
   const hoekpunt4 = new Punt(30, 210, sketch)
 
   const pauseButton = sketch.createButton('Pauze');
-  pauseButton.position(sketch.width/2, sketch.height);
+  pauseButton.position(sketch.width2, sketch.height);
   pauseButton.mousePressed(pause);
 
   config.hoekpunten = [startpunt, hoekpunt1, hoekpunt2, hoekpunt3, hoekpunt4]
 
-  const a = new Sporter(startpunt.x, startpunt.y, sketch, "Donald", 0.9, TEMPOS.DUUR, 'green')
-  const b = new Sporter(startpunt.x, startpunt.y, sketch, "Katrien", 1.1, TEMPOS.VLOT, 'darkgreen', true, a)
+  const a = new Sporter(startpunt.x, startpunt.y, sketch, "Donald", 0.9, TEMPOS.DUUR, 'red')
+  const b = new Sporter(startpunt.x, startpunt.y, sketch, "Katrien", 1.1, TEMPOS.VLOT, 'darkred', true, a)
   const c = new Sporter(startpunt.x, startpunt.y, sketch, "Kwik", 1.5, TEMPOS.DUUR, 'gray')
   const d = new Sporter(startpunt.x, startpunt.y, sketch, "Kwek", 1.2, TEMPOS.VLOT, 'lightgray', true, c)
 
